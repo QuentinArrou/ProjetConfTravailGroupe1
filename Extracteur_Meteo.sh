@@ -28,3 +28,10 @@ TEMP_PREVISION=$(grep -o '"avgtempC":[^,]*' "meteo_$VILLE.txt" | sed -n '2p' | s
 # 3. Affichage et formatage des températures récupérées
 echo "Température actuelle : ${TEMP_ACTUELLE}°C"
 echo "Température prévue demain : ${TEMP_PREVISION}°C"
+
+
+#4. Enregistrer température actuelle et prévision du lendemain dans fichier meteo.txt
+DATE=$(date +"%Y-%m-%d")
+HEURE=$(date +"%H:%M")
+echo "$DATE - $HEURE - Ville : $VILLE - Température actuelle : ${TEMP_ACTUELLE}°C - Prévision du lendemain : ${TEMP_PREVISION}°C" >> meteo.txt
+rm "meteo_$VILLE.txt"
