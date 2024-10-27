@@ -1,12 +1,10 @@
 # Vérification de l'argument (la ville)
 if [ "$#" -ne 1 ]; then
-    echo "Utilisation type: $0 VILLE"
-    exit 1
+    echo "Aucune ville spécifiée, Toulouse comme ville par défaut"
+    VILLE="Toulouse"
+else
+    VILLE="$1"
 fi
-
-# Si ville est dfinie on rcupère l'argument dans une variable
-VILLE="$1"
-
 
 # 1. Récupérer les données météorologiques avec la commande curl puis les sauvegarder dans un
 #fichier local "VILLE.txt".
