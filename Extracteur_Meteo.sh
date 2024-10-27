@@ -8,11 +8,12 @@ fi
 VILLE="$1"
 
 
-# 1. Récupérer les données météorologiques avec la commande curl
+# 1. Récupérer les données météorologiques avec la commande curl puis les sauvegarder dans un
+#fichier local "VILLE.txt".
 echo "Récupération des données pour la ville : $VILLE"
 curl -s "wttr.in/$VILLE?format=j2" > "meteo_$VILLE.txt"
 
-#Vérification récupration réussie
+#Vérifier si la récupration est réussie
 if [ $? -eq 0 ]; then
 	echo "Météo pour $VILLE sauvegardée dans meteo_$VILLE.txt"
 else
@@ -20,10 +21,10 @@ else
 	exit 1
 fi
 
-# 2. Extraire la température actuelle et la prévision pour le lendemain
+# 2. Extraire du fichier la température actuelle et la prévision pour le lendemain
 TEMP_ACTUELLE=$(grep -o '"temp_C":[^,]*' "meteo_$VILLE.txt" | head -n 1 | sed 's/[^0-9\-]*//g')
 TEMP_PREVISION=$(grep -o '"avgtempC":[^,]*' "meteo_$VILLE.txt" | sed -n '2p' | sed 's/[^0-9\-]*//g')
 
-# Affichage des températures
-echo "Température actuellle : ${TEMP_ACTUELLE}°C"
-echo "Temprature prvue demmain : ${TEMP_PREVISION}°C"
+# 3. Affichage et formatage des températures récupérées
+echo "Température actuelle : ${TEMP_ACTUELLE}°C"
+echo "Température prévue demain : ${TEMP_PREVISION}°C"
