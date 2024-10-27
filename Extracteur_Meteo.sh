@@ -1,20 +1,30 @@
-#!/bin/bash
+#!bin/bash
 
-# Verification que la ville a bien été définie
+# Vérification de l'argument (la ville)
 if [ "$#" -ne 1 ]; then
-	echo "Utilisation type : $0 VILLE"
-	exit 1
+    echo "Utilisiation type: $0 <ville>"
+    exit 1
 fi
 
-# Si ville est définie on récupère l'agument dans une variable
+# Si ville est dfinie on rcupère l'argument dans une variable
 VILLE="$1"
 
-# Utilise commande curl pour récupérer les données météo
-curl -s "wttr.in/$VILLE" > "meteo_$VILLE.txt"
 
-# Verification récupération réussie
-if [ $? -eq 0 ]; then
-	echo "Météo pour $VILLE sauvergardée dans meteo_$VILLE.txt"
+# 1. Récupérer les données météorologiques avec la commande curl
+echo "Récupération des données pour la ville : $VILLE"
+curl -s "wttr.in/$VILLE?format=j2" > "meteo_$VILLE.txt"
+
+#Vérification récupration réussie
+if [ $? -eq 0]; then
+	echo "Météo pour $VILLE sauvegardée dans  meteo_$VILLE.txt"
 else
-	echo "Erreur : recuperation des données impossible pour $VILLE"
-fi
+	echo "Erreur : récupération des données impossible pour $VILLE"
+	exit 1
+
+# 2. Extraire la température actuelle et la prévision pour le lendemain
+TEMP_ACTUELLE=$(grep -o '"temp_C":[^,]*' "meteo_$VILLE.txt" | head -n 1 | sed 's/[^0-9\-]*//g')
+TEMP_PREVISION=$(grep -o '"avgtempC":[^,]*' "meteo_$VILLE.txt" | sed -n '2p' | sed 's/[^0-9\-]*//g')
+
+# Affichage des températures
+echo "Température actuellle : ${TEMP_ACTUELLE}°C"
+echo "Temprature prvue demmain : ${TEMP_PREVISION}°C"
