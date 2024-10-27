@@ -1,8 +1,6 @@
-#!bin/bash
-
 # Vérification de l'argument (la ville)
 if [ "$#" -ne 1 ]; then
-    echo "Utilisiation type: $0 <ville>"
+    echo "Utilisation type: $0 VILLE"
     exit 1
 fi
 
@@ -15,11 +13,12 @@ echo "Récupération des données pour la ville : $VILLE"
 curl -s "wttr.in/$VILLE?format=j2" > "meteo_$VILLE.txt"
 
 #Vérification récupration réussie
-if [ $? -eq 0]; then
-	echo "Météo pour $VILLE sauvegardée dans  meteo_$VILLE.txt"
+if [ $? -eq 0 ]; then
+	echo "Météo pour $VILLE sauvegardée dans meteo_$VILLE.txt"
 else
 	echo "Erreur : récupération des données impossible pour $VILLE"
 	exit 1
+fi
 
 # 2. Extraire la température actuelle et la prévision pour le lendemain
 TEMP_ACTUELLE=$(grep -o '"temp_C":[^,]*' "meteo_$VILLE.txt" | head -n 1 | sed 's/[^0-9\-]*//g')
