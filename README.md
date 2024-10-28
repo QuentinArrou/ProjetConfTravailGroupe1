@@ -34,18 +34,20 @@ Pour configurer la tâche, ouvrez le fichier crontab avec la commande suivante d
 
 
 
-- **Exécuter le script toutes les minutes ** : (* * * * *) /Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1
+- **Exécuter le script toutes les minutes ** :
+
+ ```* * * * * ```/Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1
 Cette ligne exécute le script toutes les minutes et enregistre les données météo dans le fichier meteo.txt.
 
 
 
-- **Exécuter le script toutes les 30 minutes ** : (*/30 * * * *) /Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1
+- **Exécuter le script toutes les 30 minutes ** : ```*/30 * * * *``` /Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1
 
 
 
-- **Exécuter le script tous les jours à 8h du matin ** : (0 8 * * *) /Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1
+- **Exécuter le script tous les jours à 8h du matin ** : ```0 8 * * *``` /Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1
 
-Chaque ligne est constituée des informations de planification (par exemple,( * * * * *) pour chaque minute), suivie du chemin vers le script et d'une redirection de la sortie vers le fichier meteo.txt pour conserver un historique.
+Chaque ligne est constituée des informations de planification (par exemple,``` * * * * *``` pour chaque minute), suivie du chemin vers le script et d'une redirection de la sortie vers le fichier meteo.txt pour conserver un historique.
 
 
 - **Enregistrer et Quitter le Crontab ** : Après avoir ajouté la ligne pour planifier l'exécution du script, enregistrez et quittez l’éditeur. La tâche sera automatiquement programmée pour s'exécuter aux intervalles spécifiés.
