@@ -20,6 +20,10 @@ Pour exécuter le script, ouvrez un terminal et utilisez la commande suivante :
 
 ./Extracteur_Meteo.sh [Ville]
 
+Par default le format utilisé est le format txt qui enregistre les donnees dans meteo.txt et dasn un log journalier cependant il est également possible de l'enregistrer au format json dans meteo.json en rajoutant l'argument --json après la ville souhaitée :
+
+./Extracteur_Meteo.sh [Ville] --json 
+
 
 ## Configuration d'une Tâche Cron pour l'Automatisation des Données Météo
 

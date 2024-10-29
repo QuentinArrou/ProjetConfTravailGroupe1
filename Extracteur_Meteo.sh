@@ -1,9 +1,15 @@
 # Vérification de l'argument (la ville)
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 ]; then
     echo "Aucune ville spécifiée, Toulouse comme ville par défaut"
     VILLE="Toulouse"
 else
     VILLE="$1"
+fi
+
+# Vérification de l'option JSON
+FORMAT_JSON=false
+if [ "$2" == "--json" ]; then
+	FORMAT_JSON=true
 fi
 
 # 1. Récupérer les données météorologiques avec la commande curl puis les sauvegarder dans un
@@ -33,11 +39,32 @@ echo "Taux d'humidité : ${TAUX_HUMIDITE}%"
 echo "Visibilité : ${VISIBILITE} km"
 echo "Température prévue demain : ${TEMP_PREVISION}°C"
 
-# 4. Enregistrer température actuelle et prévision du lendemain dans fichier meteo.txt
+# 4. Enregistrer température actuelle et prévision du lendemain dans fichier meteo.txt ou le meteo.json
 DATE=$(date +"%Y-%m-%d")
 HEURE=$(date +"%H:%M")
-echo "$DATE - $HEURE - Ville : $VILLE - Température actuelle : ${TEMP_ACTUELLE}°C - Vitesse du vent : ${VITESSE_VENT} km/h - Taux d'humidité : ${TAUX_HUMIDITE}% - Visibilité : ${VISIBILITE} km - Prévision du lendemain : ${TEMP_PREVISION}°C" >> meteo.txt
-rm "meteo_$VILLE.txt"
 
-# 5. Enregistrer en plus tout  ces informations dans des logs journaliers
-echo "$DATE - $HEURE - Ville : $VILLE - Température actuelle : ${TEMP_ACTUELLE}°C - Vitesse du vent : ${VITESSE_VENT} km/h - Taux d'humidité : ${TAUX_HUMIDITE}% - Visibilité : ${VISIBILITE} km -Prévision du lendemain : ${TEMP_PREVISION}°C" >> "meteo_$DATE.txt"
+if [ "$FORMAT_JSON" = true ]; then
+	NOUVELLE_ENTREE="{
+		\"date\": \"$DATE\",
+		\"heure\": \"$HEURE\",
+		\"ville\": \"$VILLE\",
+		\"temperature_actuelle\": \"${TEMP_ACTUELLE}°C\",
+		\"temperature__prevision\": \"${TEMP_PREVISION}°C\",
+		\"vitesse_vent\": \"${VITESSE_VENT} km/h\",
+		\"humidite\": \"${TAUX_HUMIDITE}%\",
+		\"visibilite\": \"${VISIBILITE} km\"
+	}"
+	rm "meteo_$VILLE.txt"
+	if [ -f "meteo.json" ]; then
+		sed -i '$ s/],$/],/' meteo.json
+		echo ",$NOUVELLE_ENTREE]" >> meteo.json
+	else
+		echo "[$NOUVELLE_ENTREE]" > meteo.json
+	fi
+else
+	echo "$DATE - $HEURE - Ville : $VILLE - Température actuelle : ${TEMP_ACTUELLE}°C - Vitesse du vent : ${VITESSE_VENT} km/h - Taux d'humidité : ${TAUX_HUMIDITE}% - Visibilité : ${VISIBILITE} km - Prévision du lendemain : ${TEMP_PREVISION}°C" >> meteo.txt
+	rm "meteo_$VILLE.txt"
+
+	# 5. Enregistrer en plus tout  ces informations dans des logs journaliers
+	echo "$DATE - $HEURE - Ville : $VILLE - Température actuelle : ${TEMP_ACTUELLE}°C - Vitesse du vent : ${VITESSE_VENT} km/h - Taux d'humidité : ${TAUX_HUMIDITE}% - Visibilité : ${VISIBILITE} km -Prévision du lendemain : ${TEMP_PREVISION}°C" >> "meteo_$DATE.txt"
+fi

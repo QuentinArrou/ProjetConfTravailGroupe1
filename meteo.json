@@ -1,0 +1,30 @@
+[{
+		"date": "2024-10-29",
+		"heure": "20:36",
+		"ville": "WahsingtonDC",
+		"temperature_actuelle": "15°C",
+		"temperature__prevision": "20°C",
+		"vitesse_vent": "4 km/h",
+		"humidite": "96%",
+		"visibilite": "10 km"
+	}]
+,{
+		"date": "2024-10-29",
+		"heure": "20:36",
+		"ville": "Bordeaux",
+		"temperature_actuelle": "16°C",
+		"temperature__prevision": "17°C",
+		"vitesse_vent": "4 km/h",
+		"humidite": "100%",
+		"visibilite": "10 km"
+	}]
+,{
+		"date": "2024-10-29",
+		"heure": "20:36",
+		"ville": "Toulouse",
+		"temperature_actuelle": "19°C",
+		"temperature__prevision": "17°C",
+		"vitesse_vent": "17 km/h",
+		"humidite": "73%",
+		"visibilite": "10 km"
+	}]
