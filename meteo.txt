@@ -4,3 +4,5 @@
 2024-10-29 - 03:02 - Ville : toulouse - Température actuelle : 15°C - Prévision du lendemain : 17°C
 2024-10-29 - 03:02 - Ville : Lille - Température actuelle : 13°C - Prévision du lendemain : 14°C
 2024-10-29 - 14:25 - Ville : Toulouse - Température actuelle : 20°C - Prévision du lendemain : 17°C
+2024-10-29 - 15:25 - Ville : Toulouse - Température actuelle : 20°C - Vitesse du vent : 19 km/h - Taux d'humidité : 71% - Visibilité : 10 km - Prévision du lendemain : 17°C
+2024-10-29 - 15:26 - Ville : Lille - Température actuelle : 13°C - Vitesse du vent : 13 km/h - Taux d'humidité : 88% - Visibilité : 10 km - Prévision du lendemain : 14°C
