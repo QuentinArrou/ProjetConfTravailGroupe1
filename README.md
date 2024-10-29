@@ -21,33 +21,29 @@ Pour exécuter le script, ouvrez un terminal et utilisez la commande suivante :
 ./Extracteur_Meteo.sh [Ville]
 
 
-## Configuration d'une Tâche Cron pour l'Automatisation des Données Météo:
-Pour automatiser la récupération des données météo à intervalles réguliers, vous pouvez configurer une tâche cron sur votre système.
-Pour configurer la tâche, ouvrez le fichier crontab avec la commande suivante dans le terminal: crontab -e
+## Configuration d'une Tâche Cron pour l'Automatisation des Données Météo: Cette tache  permet d'automatiser la récupération des données météo à intervalles réguliers en ajoutant automatiquement une nouvelle ligne dans le fichier meteo.txt à chaque exécution de la tâche cron. Chaque ligne contient les informations suivantes : date, heure, ville, température actuelle, et température prévue. Cela permet de conserver un historique consultable des données.
+Pour configurer la tâche, ouvrez le fichier crontab avec la commande suivante dans le terminal: **crontab -e**
 
 
 
 - **Ouvrir le Crontab** : Pour configurer la tâche, ouvrez le fichier crontab avec la commande suivante dans le terminal .
 
 
-- **Ajouter la Tâche Cron** : Ajoutez une ligne dans le crontab pour exécuter le script à l'intervalle souhaité. Le chemin du script doit être absolu. Voici quelques exemples .
+- **Ajouter la Tâche Cron** : Ajoutez une ligne dans le crontab pour exécuter le script à l'intervalle souhaité . Voici quelques exemples .
 
 
 
 - **Exécuter le script toutes les minutes** :
 
- ```* * * * *``` /Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1
-Cette ligne exécute le script toutes les minutes et enregistre les données météo dans le fichier meteo.txt .
+ ```* * * * *``` /Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh
+Cette ligne exécute le script toutes les minutes, ajoutant une nouvelle ligne dans meteo.txt avec les informations météo au moment de l'exécution
+
+- **Exécuter le script toutes les 30 minutes** : ```*/30 * * * *```/Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh.
 
 
+- **Exécuter le script tous les jours à 8h du matin** : ```0 8 * * *```/Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh.
 
-- **Exécuter le script toutes les 30 minutes** : ```*/30 * * * *```/Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1.
-
-
-
-- **Exécuter le script tous les jours à 8h du matin** : ```0 8 * * *```/Users/allaminemahamatatham/Projet_Config_groupe1/Extracteur_Meteo.sh >> /Users/allaminemahamatatham/Projet_Config_groupe1/meteo.txt 2>&1.
-
-Chaque ligne est constituée des informations de planification (par exemple,``` * * * * *``` pour chaque minute), suivie du chemin vers le script et d'une redirection de la sortie vers le fichier meteo.txt pour conserver un historique.
+Chaque ligne est constituée des informations de planification (par exemple,``` * * * * *``` pour chaque minute), suivie du chemin vers le script et  conserver un historique.
 
 
 - **Enregistrer et Quitter le Crontab** : Après avoir ajouté la ligne pour planifier l'exécution du script, enregistrez et quittez l’éditeur. La tâche sera automatiquement programmée pour s'exécuter aux intervalles spécifiés.
