@@ -28,8 +28,11 @@ echo "Température actuelle : ${TEMP_ACTUELLE}°C"
 echo "Température prévue demain : ${TEMP_PREVISION}°C"
 
 
-#4. Enregistrer température actuelle et prévision du lendemain dans fichier meteo.txt
+# 4. Enregistrer température actuelle et prévision du lendemain dans fichier meteo.txt
 DATE=$(date +"%Y-%m-%d")
 HEURE=$(date +"%H:%M")
 echo "$DATE - $HEURE - Ville : $VILLE - Température actuelle : ${TEMP_ACTUELLE}°C - Prévision du lendemain : ${TEMP_PREVISION}°C" >> meteo.txt
 rm "meteo_$VILLE.txt"
+
+# 5. Enregistrer en plus tout  ces informations dans des logs journaliers
+echo "$DATE - $HEURE - Ville : $VILLE - Température actuelle : ${TEMP_ACTUELLE}°C - Prévision du lendemain : ${TEMP_PREVISION}°C" >> "meteo_$DATE.txt"
