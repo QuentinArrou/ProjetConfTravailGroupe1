@@ -21,7 +21,8 @@ curl -s "wttr.in/$VILLE?format=j2" > "meteo_$VILLE.txt"
 if [ $? -eq 0 ]; then
 	echo "Météo pour $VILLE sauvegardée dans meteo_$VILLE.txt"
 else
-	echo "Erreur : récupération des données impossible pour $VILLE"
+	TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+	echo "$TIMESTAMP Erreur : récupération des données impossible pour $VILLE" >> "$meteo_error.log"
 	exit 1
 fi
 
